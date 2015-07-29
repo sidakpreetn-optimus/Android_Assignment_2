@@ -19,33 +19,39 @@ public class DBHelper extends SQLiteOpenHelper {
 	private static final String EMPLOYEE_PICTURE = "Picture";
 	private static final String EMPLOYEE_TAG = "Tag";
 	private static final String EMPLOYEE_DEPT = "Department";
- 	
 	
+	/**
+	 * Constructor for getting the Context
+	 */
 	public DBHelper(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
-		// TODO Auto-generated constructor stub
 	}
 
-	@Override
+	/*
+	 * Method for setting up Database and creating the Table 
+	 */
 	public void onCreate(SQLiteDatabase db) {
-		// TODO Auto-generated method stub
 		String create_Table = "CREATE TABLE "+DB_TABLE+
 				" ("+EMPLOYEE_NAME+" VARCHAR(255),"+
 				" "+EMPLOYEE_DESIGNATION+" VARCHAR(255),"+
 				" "+EMPLOYEE_CODE+" INT PRIMARY KEY,"+
-				" "+EMPLOYEE_PICTURE+" BLOB,"+
+				" "+EMPLOYEE_PICTURE+" VARCHAR(255),"+
 				" "+EMPLOYEE_TAG+" VARCHAR(255),"+
 				" "+EMPLOYEE_DEPT+" VARCHAR(255));";
 		db.execSQL(create_Table);
 	}
 
-	@Override
+	/*
+	 * Method for recreating the Database if new Version is passed 
+	 */
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// TODO Auto-generated method stub
 		db.execSQL("DROP TABLE IF EXISTS "+DB_TABLE);
 		this.onCreate(db);
 	}
 
+	/**
+	 * Method for inserting a new row to the Table
+	 */
 	public int createEmployee(Employee employee) {
 		
 		SQLiteDatabase db = getWritableDatabase();
@@ -64,6 +70,9 @@ public class DBHelper extends SQLiteOpenHelper {
 		return status;
 	}
 	
+	/**
+	 * Method for querying the Table against Name
+	 */
 	public List<Employee> searchEmployeeByName(String name) {
 		List<Employee> employees = new LinkedList<Employee>();
 		
@@ -79,7 +88,7 @@ public class DBHelper extends SQLiteOpenHelper {
 				employee.setName(cursor.getString(0));
 				employee.setDesignation(cursor.getString(1));
 				employee.setCode(cursor.getInt(2));
-				employee.setPicture(cursor.getBlob(3));
+				employee.setPicture(cursor.getString(3));
 				employee.setTagLine(cursor.getString(4));
 				employee.setDepartment(cursor.getString(5));
 				employees.add(employee);
@@ -88,6 +97,9 @@ public class DBHelper extends SQLiteOpenHelper {
 		return employees;
 	}
 	
+	/**
+	 * Method for querying the Table against Designation
+	 */	
 	public List<Employee> searchEmployeeByDesignation(String designation) {
 		List<Employee> employees = new LinkedList<Employee>();
 		
@@ -103,7 +115,7 @@ public class DBHelper extends SQLiteOpenHelper {
 				employee.setName(cursor.getString(0));
 				employee.setDesignation(cursor.getString(1));
 				employee.setCode(cursor.getInt(2));
-				employee.setPicture(cursor.getBlob(3));
+				employee.setPicture(cursor.getString(3));
 				employee.setTagLine(cursor.getString(4));
 				employee.setDepartment(cursor.getString(5));
 				employees.add(employee);
@@ -112,24 +124,31 @@ public class DBHelper extends SQLiteOpenHelper {
 		return employees;		
 	}
 	
+	/**
+	 * Method for querying the Table against Code
+	 */
 	public Employee searchEmployeeByCode(int code) {
 		SQLiteDatabase db = getReadableDatabase();
 		
 		Cursor cursor = db.rawQuery("SELECT * FROM "+DB_TABLE+" WHERE "+EMPLOYEE_CODE+"=?", new String[] {String.valueOf(code)});
+		Employee employee = null;
 		
-		if(cursor!=null)
+		if(cursor!=null && cursor.getCount()>0) {
 			cursor.moveToFirst();
-		
-		Employee employee = new Employee();
-		employee.setName(cursor.getString(0));
-		employee.setDesignation(cursor.getString(1));
-		employee.setCode(cursor.getInt(2));
-		employee.setPicture(cursor.getBlob(3));
-		employee.setTagLine(cursor.getString(4));
-		employee.setDepartment(cursor.getString(5));
+			employee = new Employee();
+			employee.setName(cursor.getString(0));
+			employee.setDesignation(cursor.getString(1));
+			employee.setCode(cursor.getInt(2));
+			employee.setPicture(cursor.getString(3));
+			employee.setTagLine(cursor.getString(4));
+			employee.setDepartment(cursor.getString(5));
+		}
 		return employee;		
 	}
 	
+	/**
+	 * Method for getting all the values from the Table
+	 */	
 	public List<Employee> getAllEmployess() {
 		List<Employee> employees = new LinkedList<Employee>();
 		
@@ -145,7 +164,7 @@ public class DBHelper extends SQLiteOpenHelper {
 				employee.setName(cursor.getString(0));
 				employee.setDesignation(cursor.getString(1));
 				employee.setCode(cursor.getInt(2));
-				employee.setPicture(cursor.getBlob(3));
+				employee.setPicture(cursor.getString(3));
 				employee.setTagLine(cursor.getString(4));
 				employee.setDepartment(cursor.getString(5));
 				employees.add(employee);
@@ -154,6 +173,9 @@ public class DBHelper extends SQLiteOpenHelper {
 		return employees;
 	}
 	
+	/**
+	 * Method for deleting the whole table values
+	 */	
 	public void deleteTableRows() {
 		SQLiteDatabase db = getWritableDatabase();
 		db.delete(DB_TABLE, null, null);

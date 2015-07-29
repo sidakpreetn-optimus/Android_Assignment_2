@@ -33,6 +33,7 @@
                 android:id="@+id/editTextName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+				android:layout_weight="1"
                 android:ems="10" >
 
                 <requestFocus />
@@ -55,6 +56,7 @@
                 android:id="@+id/editTextDesignation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+				android:layout_weight="1"                
                 android:ems="10" />
 
         </TableRow>
@@ -74,6 +76,7 @@
                 android:id="@+id/editTextCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+				android:layout_weight="1"                
                 android:inputType="number"
                 android:ems="10" />
 
@@ -88,13 +91,14 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Image" />
 
-            <Button
-                android:id="@+id/buttonPicture"
+            <Spinner
+                android:id="@+id/spinnerAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select" />
+                android:layout_weight="1" />
 
         </TableRow>
 
@@ -113,6 +117,7 @@
                 android:id="@+id/editTextTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+				android:layout_weight="1"                
                 android:ems="10" />
 
         </TableRow>
@@ -132,6 +137,7 @@
                 android:id="@+id/editTextDept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+				android:layout_weight="1"                
                 android:ems="10" />
 
         </TableRow>

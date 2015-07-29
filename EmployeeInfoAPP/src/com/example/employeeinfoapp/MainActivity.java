@@ -8,66 +8,80 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 public class MainActivity extends ActionBarActivity {
 
-	DBHelper helper;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        helper = new DBHelper(this);
-    }
+	private DBHelper helper;
 
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		helper = new DBHelper(this);
+	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    
-    public void add(View v) {
-    	startActivity(new Intent(this, AddClass.class));
-    }
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
-    public void search(View v) {
-    	startActivity(new Intent(this, SearchClass.class));    	
-    }
-    
-    public void browse(View v) {
-    	startActivity(new Intent(this, BrowseClass.class));    	
-    }
+	/**
+	 * Called method when ADD is clicked from Main Screen
+	 */
+	public void add(View v) {
+		startActivity(new Intent(this, AddClass.class));
+	}
 
-    public void reset(View v) {
-    	//CODE for reseting database    	
-    	//first a dialog then delete()
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete DATABASE ? ");
-        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                 //TODO
-                 helper.deleteTableRows();
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                 //TODO
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
+	/**
+	 * Called method when SEARCH is clicked from Main Screen
+	 */
+	public void search(View v) {
+		startActivity(new Intent(this, SearchClass.class));
+	}
+
+	/**
+	 * Called method when BROWSE is clicked from Main Screen
+	 */
+	public void browse(View v) {
+		startActivity(new Intent(this, BrowseClass.class));
+	}
+
+	/**
+	 * Called method when RESET DATABSE is clicked from Main Screen
+	 */
+	public void reset(View v) {
+		// CODE for reseting database
+		// first a dialog then delete() called
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Delete DATABASE ? ");
+		builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				helper.deleteTableRows();
+			}
+		});
+		builder.setNegativeButton("CANCEL",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+					}
+				});
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}
+
+	/**
+	 * Takes the user to launcher when pressed back from Main Screen
+	 */
+	public void onBackPressed() {
+		Intent startMain = new Intent(Intent.ACTION_MAIN);
+		startMain.addCategory(Intent.CATEGORY_HOME);
+		startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(startMain);
+	}
 }

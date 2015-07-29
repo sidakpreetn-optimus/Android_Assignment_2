@@ -14,11 +14,11 @@ import android.widget.ListView;
 
 public class BrowseClass extends Activity implements OnItemClickListener {
 
-	DBHelper helper;
-	ListView listview;
-	List<Employee> list;
-	ArrayAdapter<String> listviewadapter;
-	
+	private DBHelper helper;
+	private ListView listview;
+	private List<Employee> list;
+	private ArrayAdapter<String> listviewadapter;
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_browse);
@@ -27,21 +27,29 @@ public class BrowseClass extends Activity implements OnItemClickListener {
 		setupList();
 	}
 
+	/**
+	 * Method for setting getting employee list and setting it in adapter
+	 */
 	private void setupList() {
 		list = helper.getAllEmployess();
 		List<String> tempList = new ArrayList<String>();
-		for(int i=0;i<list.size();i++) {
-			tempList.add(list.get(i).getName()+"\n"+list.get(i).getDesignation());
+		for (int i = 0; i < list.size(); i++) {
+			tempList.add(list.get(i).getName() + "\n"
+					+ list.get(i).getDesignation());
 		}
-		listviewadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tempList);
+		listviewadapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, tempList);
 		listview.setOnItemClickListener(this);
 		listview.setAdapter(listviewadapter);
 	}
 
+	/*
+	 * Method for displaying employee's details on new activity 
+	 */
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		Intent intent = new Intent(this, DisplayInfoClass.class);
-        Bundle bundle = new Bundle();  
-        bundle.putSerializable("selectedEmployee", list.get(arg2));  
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("selectedEmployee", list.get(arg2));
 		intent.putExtras(bundle);
 		startActivity(intent);
 	}

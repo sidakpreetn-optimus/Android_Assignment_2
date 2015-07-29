@@ -1091,7 +1091,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f05005a;
+        public static final int action_settings=0x7f05005b;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1099,8 +1099,7 @@ containing a value of this type.
         public static final int buttonAdd=0x7f050053;
         public static final int buttonAddMain=0x7f05003d;
         public static final int buttonBrowseMain=0x7f05003f;
-        public static final int buttonPicture=0x7f05004c;
-        public static final int buttonSearch=0x7f050057;
+        public static final int buttonSearch=0x7f050058;
         public static final int buttonSearchMain=0x7f05003e;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
@@ -1112,7 +1111,7 @@ containing a value of this type.
         public static final int editTextDept=0x7f050052;
         public static final int editTextDesignation=0x7f050046;
         public static final int editTextName=0x7f050043;
-        public static final int editTextSearch=0x7f050056;
+        public static final int editTextSearch=0x7f050057;
         public static final int editTextTag=0x7f05004f;
         public static final int edit_query=0x7f050030;
         public static final int end=0x7f050013;
@@ -1123,9 +1122,10 @@ containing a value of this type.
         public static final int icon=0x7f05002a;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
+        public static final int imageViewEmployee=0x7f050056;
         public static final int listMode=0x7f050001;
         public static final int listViewBrowse=0x7f050054;
-        public static final int listViewSearch=0x7f050059;
+        public static final int listViewSearch=0x7f05005a;
         public static final int list_item=0x7f050029;
         public static final int middle=0x7f050012;
         public static final int never=0x7f050009;
@@ -1148,7 +1148,8 @@ containing a value of this type.
         public static final int showCustom=0x7f050007;
         public static final int showHome=0x7f050004;
         public static final int showTitle=0x7f050006;
-        public static final int spinnerSearch=0x7f050058;
+        public static final int spinnerAdd=0x7f05004c;
+        public static final int spinnerSearch=0x7f050059;
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
         public static final int tabMode=0x7f050002;
